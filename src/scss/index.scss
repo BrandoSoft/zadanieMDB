@@ -1,0 +1,15 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+body {
+    background-color: white;
+}
+
+.jobDone {
+    text-decoration: line-through;
+}
+
+.fa-check,
+.fa-edit,
+.fa-trash {
+    pointer-events: none;
+}
