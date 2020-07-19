@@ -336,12 +336,6 @@ const startCounting = () => {
   countingOthersWeight('others');
 };
 
-const showMeArray = () => {
-  console.log(items);
-};
-const showitems = document.querySelector('#showitems');
-showitems.addEventListener('click', showMeArray);
-
 quantityRadio.addEventListener('click', quantityWeightChanger);
 weightRadio.addEventListener('click', quantityWeightChanger);
 addItemButton.addEventListener('click', addItemToArray);
