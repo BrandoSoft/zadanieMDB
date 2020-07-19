@@ -14,6 +14,14 @@ const foodCounter = document.querySelector('#foodCounter');
 const drinksCounter = document.querySelector('#drinksCounter');
 const chemistryCounter = document.querySelector('#chemistryCounter');
 const othersCounter = document.querySelector('#othersCounter');
+const sumOfFoodWeight = document.querySelector('#sumOfFoodWeight');
+const sumOfFoodQuantity = document.querySelector('#sumOfFoodQuantity');
+const sumOfDrinksWeight = document.querySelector('#sumOfDrinksWeight');
+const sumOfDrinksQuantity = document.querySelector('#sumOfDrinksQuantity');
+const sumOfChemistryWeight = document.querySelector('#sumOfChemistryWeight');
+const sumOfChemistryQuantity = document.querySelector('#sumOfChemistryQuantity');
+const sumOfOthersWeight = document.querySelector('#sumOfOthersWeight');
+const sumOfOthersQuantity = document.querySelector('#sumOfOthersQuantity');
 
 const foodLi = document.querySelector('#foodLi');
 const drinksLi = document.querySelector('#drinksLi');
@@ -25,6 +33,8 @@ const weightRadio = document.querySelector('#weightRadio');
 
 const items = [];
 
+// function showing labels depends what we chose, have to work on it a bit more.
+
 const quantityWeightChanger = () => {
   if (quantityRadio.checked) {
     quantityInput.classList.remove('d-none');
@@ -35,9 +45,14 @@ const quantityWeightChanger = () => {
     weightInput.classList.remove('d-none');
   }
 };
+
+// adding class if task done
+
 const makeComplite = (e) => {
   e.target.parentNode.firstChild.classList.toggle('jobDone');
 };
+
+// creating list
 
 const createLists = () => {
   foodLi.textContent = '';
@@ -115,6 +130,7 @@ const createLists = () => {
   ${items.filter((x) => x.type === 'others').length >= 2 ? 'items' : 'item'}`;
 };
 
+// adding item, need to add some validation later
 const addItemToArray = () => {
   if (addItemInput.value) {
     const newItemInArray = {
@@ -134,14 +150,19 @@ const addItemToArray = () => {
 
   sendToLocal();
   createLists();
+  startCounting();
 };
-
+// Removing Items from categories
 const removeFromItems = (e) => {
   const targetContent = e.target.parentNode.firstChild.firstChild.textContent;
   const indexNumber = items.findIndex((x) => x.name === targetContent);
   items.splice(indexNumber, 1);
+  sendToLocal();
   createLists();
+  startCounting();
 };
+
+// Edit Items, something goes wrong here, have to find what
 
 const editItems = (e) => {
   const targetContent = e.target.parentNode.firstChild.firstChild.textContent;
@@ -176,14 +197,20 @@ const editItems = (e) => {
     }
     createLists();
     sendToLocal();
+    startCounting();
   };
   saveEditButton.addEventListener('click', editName);
 };
+
+// Sending to Local Storage
 
 const sendToLocal = () => {
   const itemsSerialized = JSON.stringify(items);
   localStorage.setItem('shopingList', itemsSerialized);
 };
+
+// Get Items from Local Storage
+
 const getFromLocale = () => {
   const itemsFromLocal = localStorage.getItem('shopingList');
   const itemFromLocalAfterParse = JSON.parse(itemsFromLocal);
@@ -193,9 +220,131 @@ const getFromLocale = () => {
   createLists();
 };
 
+// Counters, have to rebuild into 1 function later
+
+const countingFoodWeight = (itemtype) => {
+  let foodWeightCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.weight;
+    if (number) {
+      foodWeightCounter += parseInt(item.weight, 10);
+    }
+  });
+  sumOfFoodWeight.textContent = `Food weight is ${foodWeightCounter} g 
+  (${foodWeightCounter / 1000} kg)`;
+};
+const countingDrinksWeight = (itemtype) => {
+  let drinksWeightCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.weight;
+    if (number) {
+      drinksWeightCounter += parseInt(item.weight, 10);
+    }
+  });
+  sumOfDrinksWeight.textContent = `Drinks weight is ${drinksWeightCounter} g
+   (${drinksWeightCounter / 1000} kg)`;
+};
+const countingChemistryWeight = (itemtype) => {
+  let chemistryWeightCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.weight;
+    if (number) {
+      chemistryWeightCounter += parseInt(item.weight, 10);
+    }
+  });
+  sumOfChemistryWeight.textContent = `Chemistry weight is ${chemistryWeightCounter} g
+   (${chemistryWeightCounter / 1000} kg)`;
+};
+const countingOthersWeight = (itemtype) => {
+  let othersWeightCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.weight;
+    if (number) {
+      othersWeightCounter += parseInt(item.weight, 10);
+    }
+  });
+  sumOfOthersWeight.textContent = `Other's weight is ${othersWeightCounter} g
+   (${othersWeightCounter / 1000} kg)`;
+};
+
+const countingFoodQuantity = (itemtype) => {
+  let foodQuantityCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.quantity;
+    if (number) {
+      foodQuantityCounter += parseInt(item.quantity, 10);
+    }
+  });
+  sumOfFoodQuantity.textContent = `Food quantity is ${foodQuantityCounter}szt.`;
+};
+const countingDrinksQuantity = (itemtype) => {
+  let drinksQuantityCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.quantity;
+    if (number) {
+      drinksQuantityCounter += parseInt(item.quantity, 10);
+    }
+  });
+  sumOfDrinksQuantity.textContent = `Drinks quantity is ${drinksQuantityCounter} szt.`;
+};
+const countingChemistryQuantity = (itemtype) => {
+  let chemistryQuantityCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.quantity;
+    if (number) {
+      chemistryQuantityCounter += parseInt(item.quantity, 10);
+    }
+  });
+  sumOfChemistryQuantity.textContent = `Chemistry quantity is ${chemistryQuantityCounter} szt.`;
+};
+const countingOthersQuantity = (itemtype) => {
+  let othersQuantityCounter = 0;
+  const itemsToCount = items.filter((item) => item.type === itemtype);
+
+  itemsToCount.forEach((item) => {
+    const number = item.quantity;
+    if (number) {
+      othersQuantityCounter += parseInt(item.quantity, 10);
+    }
+  });
+  sumOfOthersQuantity.textContent = `Others quantity is ${othersQuantityCounter} szt.`;
+};
+
+const startCounting = () => {
+  countingFoodWeight('food');
+  countingFoodQuantity('food');
+  countingDrinksWeight('drinks');
+  countingDrinksQuantity('drinks');
+  countingChemistryQuantity('chemistry');
+  countingChemistryWeight('chemistry');
+  countingOthersQuantity('others');
+  countingOthersWeight('others');
+};
+
+// const showmearray = () => {
+//   console.log(items);
+// };
+// const showitems = document.querySelector('#showitems');
+// showitems.addEventListener('click', showmearray);
+
 quantityRadio.addEventListener('click', quantityWeightChanger);
 weightRadio.addEventListener('click', quantityWeightChanger);
 addItemButton.addEventListener('click', addItemToArray);
+
 document.addEventListener('DOMContentLoaded', getFromLocale);
 
 export default {
