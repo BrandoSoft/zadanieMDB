@@ -21,52 +21,54 @@
 <body>
   <!-- Start your project here-->
   <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4"></div>
+      <form class="text-center border border-light p-5 col-md-3">
+        <!-- Large input -->
+        <input class="form-control form-control-lg" type="text" placeholder="Item Name" id="addItemInput">
 
 
-    <form class="text-center border border-light p-5 col-md-3">
-      <!-- Large input -->
-      <input class="form-control form-control-lg" type="text" placeholder="Item Name" id="addItemInput">
+        <select class="browser-default custom-select my-3" id="selectInput">
+          <option value="food">Food</option>
+          <option value="drinks">Drinks</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="others">Others</option>
+        </select>
 
+        <!-- Group of material radios - option 1 -->
 
-      <select class="browser-default custom-select my-3" id="selectInput">
-        <option value="food">Food</option>
-        <option value="drinks">Drinks</option>
-        <option value="chemistry">Chemistry</option>
-        <option value="others">Others</option>
-      </select>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="quantityRadio" name="groupOfMaterialRadios"
+            autocomplete="off">
+          <label class="form-check-label" for="quantityRadio">Quantity</label>
+        </div>
 
-      <!-- Group of material radios - option 1 -->
+        <!-- Group of material radios - option 2 -->
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="weightRadio" name="groupOfMaterialRadios" autocomplete="off">
+          <label class="form-check-label" for="weightRadio">Weight</label>
+        </div>
 
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="quantityRadio" name="groupOfMaterialRadios" autocomplete="off">
-        <label class="form-check-label" for="quantityRadio">Quantity</label>
-      </div>
+        <input class="form-control d-none my-3" type="text" placeholder="Quantity" id="quantityInput" type="number">
+        <input class="form-control d-none my-3" type="text" placeholder="grams" id="weightInput" type="number">
 
-      <!-- Group of material radios - option 2 -->
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="weightRadio" name="groupOfMaterialRadios" autocomplete="off">
-        <label class="form-check-label" for="weightRadio">Weight</label>
-      </div>
+        <button type="button" class="btn btn-outline-primary waves-effect" id="addItemButton">Add item</button>
 
-      <input class="form-control d-none" type="text" placeholder="Quantity" id="quantityInput" type="number">
-      <input class="form-control d-none my-3" type="text" placeholder="grams" id="weightInput" type="number">
-
-      <button type="button" class="btn btn-outline-primary waves-effect" id="addItemButton">Add item</button>
-
-    </form>
-
+      </form>
+      <div class="col-md-4"></div>
+    </div>
 
 
 
     <div class="row text-center">
 
-      <div class="col-md-3">
+      <div class="col-md-3" draggable="true">
         <!-- Card -->
         <div class="card">
           <!-- Card content -->
           <div class="card-body">
             <!-- Title -->
-            <h4 class=" card-title d-inline"><a>Food</a></h4>
+            <h4 class="card-title d-inline"><a>Food</a></h4>
             <h6 class="card-title d-inline ml-5" id="foodCounter"></h6>
             <!-- Text -->
             <ul class="list-group" id="foodLi">
@@ -146,7 +148,7 @@
 
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title w-100" id="myModalLabel">Edit name, category or quantity/weight</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -173,7 +175,7 @@
   </div>
   <!-- Central Modal Small -->
   <!-- End your project here-->
-  <!-- <button id="showitems">showitems</button> -->
+  <button id="showitems">showitems</button>
 
 </body>
 <!-- Main js file -->

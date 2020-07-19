@@ -168,7 +168,7 @@ const editItems = (e) => {
   const targetContent = e.target.parentNode.firstChild.firstChild.textContent;
   const indexNumber = items.findIndex((x) => x.name === targetContent);
 
-  selectEditInput.value = '';
+  selectEditInput.value = items[indexNumber].type;
   editInput.value = '';
   editWeightInput.value = '';
   editQuantityInput.value = '';
@@ -218,6 +218,7 @@ const getFromLocale = () => {
     items.push(item);
   });
   createLists();
+  startCounting();
 };
 
 // Counters, have to rebuild into 1 function later
@@ -321,7 +322,7 @@ const countingOthersQuantity = (itemtype) => {
       othersQuantityCounter += parseInt(item.quantity, 10);
     }
   });
-  sumOfOthersQuantity.textContent = `Others quantity is ${othersQuantityCounter} szt.`;
+  sumOfOthersQuantity.textContent = `Other's quantity is ${othersQuantityCounter} szt.`;
 };
 
 const startCounting = () => {
@@ -335,11 +336,11 @@ const startCounting = () => {
   countingOthersWeight('others');
 };
 
-// const showmearray = () => {
-//   console.log(items);
-// };
-// const showitems = document.querySelector('#showitems');
-// showitems.addEventListener('click', showmearray);
+const showMeArray = () => {
+  console.log(items);
+};
+const showitems = document.querySelector('#showitems');
+showitems.addEventListener('click', showMeArray);
 
 quantityRadio.addEventListener('click', quantityWeightChanger);
 weightRadio.addEventListener('click', quantityWeightChanger);
